@@ -52,24 +52,24 @@ const CommunityPage: NextPage<CommunityPageProps> = ({ communityData }) => {
   }
 
   return (
-    // <>
-    //   <Header communityData={communityData} />
-    //   <PageContentLayout>
-    //     {/* Left Content */}
-    //     <>
-    //       <CreatePostLink />
-    //       <Posts
-    //         communityData={communityData}
-    //         userId={user?.uid}
-    //         loadingUser={loadingUser}
-    //       />
-    //     </>
-    //     {/* Right Content */}
-    //     <>
-    //       <About communityData={communityData} />
-    //     </>
-    //   </PageContentLayout>
-    // </>
+    <>
+      <Header communityData={communityData} />
+      <PageContentLayout>
+        {/* Left Content */}
+        <>
+          <CreatePostLink />
+          <Posts
+            communityData={communityData}
+            userId={user?.uid}
+            loadingUser={loadingUser}
+          />
+        </>
+        {/* Right Content */}
+        <>
+          <About communityData={communityData} />
+        </>
+      </PageContentLayout>
+    </>
   );
 };
 
