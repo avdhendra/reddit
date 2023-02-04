@@ -12,6 +12,12 @@ import { Community, communityState } from "../../../atoms/communitiesAtom";
 // import PageContentLayout from "../../../components/Layout/PageContent";
 // import Posts from "../../../components/Post/Posts";
 import { auth, firestore } from "../../../firebase/clientApp";
+import CommunityNotFound from "../../../components/Community/CommunityNotFound";
+import PageContentLayout from "../../../components/Layout/PageContent";
+import Header from "../../../components/Community/Header";
+import About from "../../../components/Community/About";
+import CreatePostLink from "../../../components/Community/CreatePostLink";
+import Posts from "../../../components/Post/Posts";
 
 interface CommunityPageProps {
   communityData: Community;
@@ -48,7 +54,7 @@ const CommunityPage: NextPage<CommunityPageProps> = ({ communityData }) => {
 
   // Community was not found in the database
   if (!communityData) {
-    //return <CommunityNotFound />;
+    return <CommunityNotFound />;
   }
 
   return (
@@ -89,13 +95,20 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       props: {
         communityData: communityDoc.exists()
           ? JSON.parse(
-              safeJsonStringify({ id: communityDoc.id, ...communityDoc.data() }) // needed for dates
-            )
+            safeJsonStringify({ id: communityDoc.id, ...communityDoc.data() }) // needed for dates
+          )
           : "",
       },
     };
   } catch (error) {
     // Could create error page here
     console.log("getServerSideProps error - [community]", error);
+    // return {
+    //   redirect: {
+    //     destination: '/',
+    //     statusCode: 307
+    //   }
+   
+    // }
   }
 }

@@ -11,6 +11,7 @@ import {
   defaultCommunity,
 } from "../atoms/communitiesAtom";
 import { auth, firestore } from "../firebase/clientApp";
+import { getMySnippets } from "../helper/firestore";
 //import { getMySnippets } from "../helpers/firestore";
 
 // Add ssrCommunityData near end as small optimization
@@ -19,7 +20,7 @@ const useCommunityData = (ssrCommunityData?: boolean) => {
   const router = useRouter();
   const [communityStateValue, setCommunityStateValue] =
     useRecoilState(communityState);
- // const setAuthModalState = useSetRecoilState(setAuthModalState);
+  const setAuthModalState = useSetRecoilState(AuthModalState);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -83,7 +84,7 @@ const useCommunityData = (ssrCommunityData?: boolean) => {
 
   const onJoinLeaveCommunity = (community: Community, isJoined?: boolean) => {
     console.log("ON JOIN LEAVE", community.id);
-
+//is the user signed in 
     if (!user) {
       setAuthModalState({ open: true, view: "login" });
       return;
